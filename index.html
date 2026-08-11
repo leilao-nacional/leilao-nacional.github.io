@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="1; URL='https://s.shopee.com.br/7prtzhUlQo?share_channel_code=1'">
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+
+    <title>Educação</title>
+    <style>
+.modal-aviso-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 20px;
+}
+.modal-aviso {
+    position: relative;
+    width: min(100%, 520px);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    background: #ffffff;
+}
+.modal-aviso img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.modal-aviso .btn-entrar {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    background: transparent;
+    border: 2px solid #0079db;
+    color: #0081eb;
+    border-radius: 6px;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.modal-aviso .btn-entrar:hover {
+    background: #ffffff;
+    color: #3500c5;
+}
+</style>
+</head>
+<body>
+<div id="avisoSessao" class="modal-aviso-overlay" aria-live="polite">
+    <div class="modal-aviso" role="dialog" aria-modal="true">
+        <img src="img/modal.jpg" alt="Aviso" />
+        <button id="btnEntrarAviso" type="button" class="btn-entrar">ENTRAR</button>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const overlay = document.getElementById('avisoSessao');
+    const button = document.getElementById('btnEntrarAviso');
+
+    if (!overlay || !button) return;
+
+    const avisoKey = 'educbrasil_aviso_entrar';
+    const ttlMinutos = 30;
+    const ttlMilissegundos = ttlMinutos * 60 * 1000;
+    const agora = Date.now();
+    const ultimoClique = Number(sessionStorage.getItem(avisoKey));
+
+    if (!ultimoClique || agora - ultimoClique > ttlMilissegundos) {
+        overlay.style.display = 'flex';
+    } else {
+        overlay.style.display = 'none';
+    }
+
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+        sessionStorage.setItem(avisoKey, String(Date.now()));
+        overlay.style.display = 'none';
+        window.open('https://s.shopee.com.br/7prtzhUlQo?share_channel_code=1', '_blank', 'noopener,noreferrer');
+    });
+});
+</script>
+</body>
+</html>
